@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src",       // source code folder
+                "/usr/include/SDL2",
+                "/usr/local/include/SDL2"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/src",   
+                    "/usr/include",             
+                    "/usr/include/SDL2",        
+                    "/usr/local/include/SDL2",  
+                    "/usr/share/doc/sdl2-doc"   
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },            
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
+
