@@ -5,16 +5,13 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src",       // source code folder
-                "/usr/include/SDL2",
-                "/usr/local/include/SDL2"
+                "/usr/include/SDL2"
             ],
             "browse": {
                 "path": [
                     "${workspaceFolder}/src",   
                     "/usr/include",             
-                    "/usr/include/SDL2",        
-                    "/usr/local/include/SDL2",  
-                    "/usr/share/doc/sdl2-doc"   
+                    "/usr/include/SDL2"        
                 ],
                 "limitSymbolsToIncludedHeaders": true
             },            
