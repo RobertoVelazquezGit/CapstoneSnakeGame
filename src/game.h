@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "barrier.h"
 
 class Game {
  public:
@@ -16,7 +17,12 @@ class Game {
   int GetSize() const;
 
  private:
-  Snake snake;
+ /*
+  * The barrier belongs to the game
+  * barrier initialized before snake because snake is initialized with barrier 
+  */
+  Barrier barrier_;
+  Snake snake;  
   SDL_Point food;
 
   std::random_device dev;

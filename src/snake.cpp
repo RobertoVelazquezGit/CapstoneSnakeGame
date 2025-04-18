@@ -1,6 +1,7 @@
 #include "snake.h"
 #include <cmath>
 #include <iostream>
+#include "SDL.h"
 
 void Snake::Update() {
   SDL_Point prev_cell{
@@ -58,6 +59,13 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   // Check if the snake has died.
   for (auto const &item : body) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
+      alive = false;
+    }
+  }
+
+  // Check if the snake died because hit the barrier
+  for(const SDL_Point& barrierPoint : barrier_.getBarrierPoints()){
+    if (current_head_cell.x == barrierPoint.x && current_head_cell.y == barrierPoint.y) {
       alive = false;
     }
   }
