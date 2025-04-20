@@ -5,6 +5,7 @@
 #include "barrier.h"
 #include "snake.h"
 #include <vector>
+#include <memory>
 
 class Renderer {
 public:
@@ -18,8 +19,11 @@ public:
   void UpdateWindowTitle(int score, int fps);
 
 private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+  using SdlWindowPtr = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
+  SdlWindowPtr sdl_window;
+
+  using SdlRendererPtr = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
+  SdlRendererPtr sdl_renderer;
 
   const std::size_t screen_width;
   const std::size_t screen_height;
