@@ -7,16 +7,14 @@
 
 class Barrier {
 public:
-  Barrier(int grid_width, int grid_height)
-      : gridwidth_(grid_width), gridheight_(grid_height), kNumberOf_points_(8U),
-        kPos_y_points_(grid_height / 4U), kPosStart_x_points_(grid_width / 4U) {
-    addBarrierPoints();
-  }
+  Barrier(int grid_width, int grid_height, int num_points, int pos_y,
+          int pos_start_x);
+
   const std::vector<SDL_Point> &getBarrierPoints() const;
   bool contains(const SDL_Point &point) const;
   bool contains(int x, int y) const;
 
-private:
+protected:
   std::vector<SDL_Point> points_;
   int gridwidth_;
   int gridheight_;
@@ -24,6 +22,24 @@ private:
   const int kPos_y_points_;
   const int kPosStart_x_points_;
 
-  void addBarrierPoints();
+  virtual void addBarrierPoints() = 0; // abstract method
 };
+
+class LineBarrier : public Barrier {
+public:
+  LineBarrier(int grid_width, int grid_height);
+
+private:
+  void addBarrierPoints() override;
+};
+
+class SquareBarrier : public Barrier {
+public:
+  SquareBarrier(int grid_width, int grid_height);
+
+private:
+  void addBarrierPoints() override;
+  const int kPointsPerRow_;
+};
+
 #endif

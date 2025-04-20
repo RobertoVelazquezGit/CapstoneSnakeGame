@@ -63,8 +63,8 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
     }
   }
 
-  // Check if the snake died because hit the barrier
-  for(const SDL_Point& barrierPoint : barrier_.getBarrierPoints()){
+  // Check if the snake died because hit the line barrier
+  for(const SDL_Point& barrierPoint : linebarrier_.getBarrierPoints()){
     if (current_head_cell.x == barrierPoint.x && current_head_cell.y == barrierPoint.y) {
       alive = false;
     }

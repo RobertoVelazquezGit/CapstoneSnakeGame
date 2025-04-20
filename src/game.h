@@ -21,7 +21,7 @@ class Game {
   * The barrier belongs to the game
   * barrier initialized before snake because snake is initialized with barrier 
   */
-  Barrier barrier_;
+  LineBarrier linebarrier_;
   Snake snake;  
   SDL_Point food;
 
