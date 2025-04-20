@@ -69,6 +69,13 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
       alive = false;
     }
   }
+
+  // Check if the snake died because hit the square barrier
+  for(const SDL_Point& barrierPoint : squarebarrier_.getBarrierPoints()){
+    if (current_head_cell.x == barrierPoint.x && current_head_cell.y == barrierPoint.y) {
+      alive = false;
+    }
+  }
 }
 
 void Snake::GrowBody() { growing = true; }

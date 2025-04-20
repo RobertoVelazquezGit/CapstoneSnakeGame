@@ -9,12 +9,13 @@ class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
 
-  Snake(int grid_width, int grid_height, LineBarrier &linebarrier)
+  Snake(int grid_width, int grid_height, LineBarrier &linebarrier, SquareBarrier &squarebarrier)
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(grid_width / 2),
         head_y(grid_height / 2),
-        linebarrier_(linebarrier) {}
+        linebarrier_(linebarrier),
+        squarebarrier_(squarebarrier) {}
 
   void Update();
 
@@ -37,7 +38,11 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
-  LineBarrier &linebarrier_;  // The snake has a reference to the barrier
+  /*
+   * The snake has references to the barriers 
+   */
+  LineBarrier &linebarrier_;
+  SquareBarrier &squarebarrier_;
 };
 
 #endif

@@ -4,7 +4,8 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : linebarrier_(grid_width, grid_height),
-      snake(grid_width, grid_height, linebarrier_),
+      squarebarrier_(grid_width, grid_height),
+      snake(grid_width, grid_height, linebarrier_, squarebarrier_),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
@@ -26,7 +27,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food, linebarrier_);
+    renderer.Render(snake, food, linebarrier_, squarebarrier_);
 
     frame_end = SDL_GetTicks();
 
@@ -58,8 +59,8 @@ void Game::PlaceFood() {
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    // And the position is not occupied by the barrier.
-    if (!snake.SnakeCell(x, y) && !linebarrier_.contains(x, y)) {
+    // And the position is not occupied by the barriers.
+    if (!snake.SnakeCell(x, y) && !linebarrier_.contains(x, y) && !squarebarrier_.contains(x, y)) {
       food.x = x;
       food.y = y;
       return;

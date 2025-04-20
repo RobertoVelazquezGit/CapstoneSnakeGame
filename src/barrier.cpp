@@ -1,6 +1,6 @@
 #include "barrier.h"
 #include "SDL.h"
-#include <algorithm> // std::find
+#include <algorithm> // std::any
 #include <utility>   // std::move
 
 // ---------- Barrier common methods ----------

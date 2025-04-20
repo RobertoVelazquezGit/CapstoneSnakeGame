@@ -40,7 +40,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food, LineBarrier const &linebarrier) {
+void Renderer::Render(Snake const snake, SDL_Point const &food, LineBarrier const &linebarrier, SquareBarrier const &squarebarrier){
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -73,9 +73,17 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, LineBarrier cons
   }
   SDL_RenderFillRect(sdl_renderer, &block);
 
-  // Render barrier
+  // Render line barrier
   SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
   for(const SDL_Point& barrierPoint : linebarrier.getBarrierPoints()){
+    block.x = barrierPoint.x * block.w;
+    block.y = barrierPoint.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);
+  }
+
+  // Render square barrier
+  SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
+  for(const SDL_Point& barrierPoint : squarebarrier.getBarrierPoints()){
     block.x = barrierPoint.x * block.w;
     block.y = barrierPoint.y * block.h;
     SDL_RenderFillRect(sdl_renderer, &block);

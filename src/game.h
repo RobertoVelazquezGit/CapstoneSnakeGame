@@ -18,10 +18,11 @@ class Game {
 
  private:
  /*
-  * The barrier belongs to the game
-  * barrier initialized before snake because snake is initialized with barrier 
+  * The barriers belongs to the game
+  * Barriers are initialized before snake because snake is initialized with the barriers
   */
   LineBarrier linebarrier_;
+  SquareBarrier squarebarrier_;
   Snake snake;  
   SDL_Point food;
 
