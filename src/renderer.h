@@ -4,8 +4,8 @@
 #include "SDL.h"
 #include "barrier.h"
 #include "snake.h"
-#include <vector>
 #include <memory>
+#include <vector>
 
 class Renderer {
 public:
@@ -19,10 +19,19 @@ public:
   void UpdateWindowTitle(int score, int fps);
 
 private:
-  using SdlWindowPtr = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
+/*
+* The order in which class members are initialized follows the order in which they are declared,
+* not the order in which you initialize them in the constructor.
+*
+* The order of destruction of members of a class does follow the order in which they are declared
+* in the class, not the order in which they are initialized in the constructor.
+*/
+  using SdlWindowPtr =
+      std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
   SdlWindowPtr sdl_window;
 
-  using SdlRendererPtr = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
+  using SdlRendererPtr =
+      std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
   SdlRendererPtr sdl_renderer;
 
   const std::size_t screen_width;
