@@ -9,10 +9,16 @@
 
 class Renderer {
 public:
+  // Rule of five
   Renderer(const std::size_t screen_width, const std::size_t screen_height,
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
-
+  Renderer(const Renderer& source);
+  Renderer& operator = (const Renderer& source);
+  Renderer(Renderer &&other);
+  Renderer& operator = (Renderer&& other);
+  
+  
   void Render(Snake const snake, SDL_Point const &food,
               LineBarrier const &linebarrier,
               SquareBarrier const &squarebarrier);
@@ -34,10 +40,13 @@ private:
       std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
   SdlRendererPtr sdl_renderer;
 
-  const std::size_t screen_width;
-  const std::size_t screen_height;
-  const std::size_t grid_width;
-  const std::size_t grid_height;
+  /*
+  * No const because assigned in assignemnt operators
+  */
+  std::size_t screen_width;
+  std::size_t screen_height;
+  std::size_t grid_width;
+  std::size_t grid_height;
 };
 
 #endif
