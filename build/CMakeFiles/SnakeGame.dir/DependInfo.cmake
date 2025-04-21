@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/main.cpp" "CMakeFiles/SnakeGame.dir/src/main.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/main.cpp.o.d"
   "/home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/renderer.cpp" "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o.d"
   "/home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snake.cpp" "CMakeFiles/SnakeGame.dir/src/snake.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/snake.cpp.o.d"
+  "/home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snakecolor.cpp" "CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o" "gcc" "CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

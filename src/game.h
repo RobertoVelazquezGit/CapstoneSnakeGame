@@ -7,6 +7,8 @@
 #include "renderer.h"
 #include "snake.h"
 #include "barrier.h"
+#include "snakecolor.h"
+
 
 class Game {
  public:
@@ -30,6 +32,9 @@ class Game {
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
+
+  std::shared_ptr<StateSnakeColor> statesnakecolor_;
+  SnakeColor snakecolor_;
 
   int score{0};
 

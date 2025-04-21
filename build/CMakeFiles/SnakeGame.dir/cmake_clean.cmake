@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o.d"
   "CMakeFiles/SnakeGame.dir/src/snake.cpp.o"
   "CMakeFiles/SnakeGame.dir/src/snake.cpp.o.d"
+  "CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o"
+  "CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o.d"
   "SnakeGame"
   "SnakeGame.pdb"
 )
