@@ -67,6 +67,7 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   for(const SDL_Point& barrierPoint : linebarrier_.getBarrierPoints()){
     if (current_head_cell.x == barrierPoint.x && current_head_cell.y == barrierPoint.y) {
       alive = false;
+      SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "You crashed!", "You died!", NULL);
     }
   }
 
@@ -74,6 +75,7 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   for(const SDL_Point& barrierPoint : squarebarrier_.getBarrierPoints()){
     if (current_head_cell.x == barrierPoint.x && current_head_cell.y == barrierPoint.y) {
       alive = false;
+      SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "You crashed!", "The game is over", NULL);
     }
   }
 }

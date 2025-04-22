@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "barrier.h"
 #include "snake.h"
+#include "snakecolor.h"
 #include <memory>
 #include <vector>
 
@@ -20,8 +21,10 @@ public:
 
   void Render(Snake const snake, SDL_Point const &food,
               LineBarrier const &linebarrier,
-              SquareBarrier const &squarebarrier);
-  void UpdateWindowTitle(int score, int fps);
+              SquareBarrier const &squarebarrier,
+              SnakeColor const &snakecolor
+            );
+  void UpdateWindowTitle(int score, int fps, bool gameisover);
 
 private:
   /*

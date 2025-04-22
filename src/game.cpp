@@ -8,9 +8,7 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       snake(grid_width, grid_height, linebarrier_, squarebarrier_),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)),
-      statesnakecolor_(std::make_shared<StateSnakeColor>()),
-      snakecolor_(statesnakecolor_) {
+      random_h(0, static_cast<int>(grid_height - 1)){
   PlaceFood();
 }
 
@@ -29,7 +27,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food, linebarrier_, squarebarrier_);
+    renderer.Render(snake, food, linebarrier_, squarebarrier_, snakecolor_);
 
     frame_end = SDL_GetTicks();
 
@@ -40,7 +38,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(score, frame_count, !snake.alive);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -52,6 +50,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       SDL_Delay(target_frame_duration - frame_duration);
     }
   }
+
+  // We may need to join the snake color thread if this is running  
+  snakecolor_.joinIfRunning();
 }
 
 void Game::PlaceFood() {
@@ -85,6 +86,9 @@ void Game::Update() {
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.02;
+
+    // Launch snakecolor task
+    snakecolor_.startTask();
   }
 }
 

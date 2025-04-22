@@ -1,28 +1,25 @@
 #ifndef SNAKECOLOR_H
 #define SNAKECOLOR_H
 
-#include <memory>
 #include <atomic>
 #include <thread>
 
-// Shared state between objects and threads
-struct StateSnakeColor {
-    std::atomic<bool> flagDifferentColor{false};
-    std::atomic<bool> taskLaunched{false}; // Ensures task is only launched once
-};
-
-// Class that manages a background task
 class SnakeColor {
 public:
-    explicit SnakeColor(std::shared_ptr<StateSnakeColor> stateSnakeColor);
+    SnakeColor() = default;
 
-    // Launches a background task if not already launched
-    std::thread launchTask();
+    void startTask();             // Launches task if not already running
+    void joinIfRunning();         // Joins the thread if joinable
+
+    bool isFlagColorSet() const;
+    bool isTaskRunning() const;
 
 private:
-    void task(std::shared_ptr<StateSnakeColor> stateSnakeColor);
+    void task();                  // Background task logic
 
-    std::shared_ptr<StateSnakeColor> stateSnakeColor_;
+    std::atomic<bool> flagColor{false};
+    std::atomic<bool> taskRunning{false};
+    std::thread workerThread_;
 };
 
 #endif // SNAKECOLOR_H
