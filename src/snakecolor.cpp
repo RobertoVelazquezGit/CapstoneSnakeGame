@@ -1,6 +1,7 @@
 #include "snakecolor.h"
 #include <chrono>
 #include <iostream>
+#include "config.h"
 
 void SnakeColor::startTask() {
   /*
@@ -14,19 +15,26 @@ void SnakeColor::startTask() {
       workerThread_.join(); // Join the previous thread if it was still active
     }
     workerThread_ = std::thread(&SnakeColor::task, this);
-  } else {
-    std::cout << "Task already running. Skipping launch.\n";
   }
+  else{
+    if constexpr(Config::ENABLE_SNAKECOLOR_DEBUG_MESSAGES){
+      std::cout << "Task already running. Skipping launch.\n";
+    }
+  }    
 }
 
 void SnakeColor::task() {
   flagColor.store(true); // Task begins
-  std::cout << "Task started: flagColor = true\n";
+  if constexpr(Config::ENABLE_SNAKECOLOR_DEBUG_MESSAGES){
+    std::cout << "Task started: flagColor = true\n";
+  }  
 
   std::this_thread::sleep_for(std::chrono::seconds(3)); // Simulated work
 
   flagColor.store(false); // Task ends
-  std::cout << "Task completed: flagColor = false\n";
+  if constexpr(Config::ENABLE_SNAKECOLOR_DEBUG_MESSAGES){
+    std::cout << "Task completed: flagColor = false\n";
+  }  
 
   taskRunning.store(false);
 }

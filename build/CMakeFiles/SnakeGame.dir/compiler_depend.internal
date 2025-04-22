@@ -2288,6 +2288,7 @@ CMakeFiles/SnakeGame.dir/src/snake.cpp.o
 
 CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o
  /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snakecolor.cpp
+ /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/config.h
  /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snakecolor.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h

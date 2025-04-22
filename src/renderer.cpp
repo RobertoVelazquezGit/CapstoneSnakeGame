@@ -137,11 +137,11 @@ void Renderer::Render(Snake const snake, SDL_Point const &food,
   block.h = screen_height / grid_height;
 
   // Clear screen
-  SDL_SetRenderDrawColor(sdl_renderer.get(), 0x1E, 0x1E, 0x1E, 0xFF);
+  SDL_SetRenderDrawColor(sdl_renderer.get(), 0x1E, 0x1E, 0x1E, 0xFF);  // Dark grey
   SDL_RenderClear(sdl_renderer.get());
 
   // Render food
-  SDL_SetRenderDrawColor(sdl_renderer.get(), 0xFF, 0xCC, 0x00, 0xFF);
+  SDL_SetRenderDrawColor(sdl_renderer.get(), 0xFF, 0xCC, 0x00, 0xFF);  // Bright yellow
   block.x = food.x * block.w;
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer.get(), &block);
@@ -178,7 +178,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &food,
   SDL_RenderFillRect(sdl_renderer.get(), &block);
 
   // Render line barrier
-  SDL_SetRenderDrawColor(sdl_renderer.get(), 255, 0, 0, 255);
+  SDL_SetRenderDrawColor(sdl_renderer.get(), 255, 0, 0, 255);  // Red
   for (const SDL_Point &barrierPoint : linebarrier.getBarrierPoints()) {
     block.x = barrierPoint.x * block.w;
     block.y = barrierPoint.y * block.h;
@@ -186,7 +186,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &food,
   }
 
   // Render square barrier
-  SDL_SetRenderDrawColor(sdl_renderer.get(), 255, 0, 0, 255);
+  SDL_SetRenderDrawColor(sdl_renderer.get(), 255, 0, 0, 255);  // Red
   for (const SDL_Point &barrierPoint : squarebarrier.getBarrierPoints()) {
     block.x = barrierPoint.x * block.w;
     block.y = barrierPoint.y * block.h;

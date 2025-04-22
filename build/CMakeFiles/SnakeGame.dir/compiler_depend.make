@@ -2281,6 +2281,7 @@ CMakeFiles/SnakeGame.dir/src/snake.cpp.o: /home/roberto/Devcpp/UdacityCpp/Capsto
   /usr/lib/gcc/x86_64-linux-gnu/13/include/xtestintrin.h
 
 CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o: /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snakecolor.cpp \
+  /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/config.h \
   /home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/snakecolor.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -2572,6 +2573,8 @@ CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o: /home/roberto/Devcpp/UdacityCpp/C
 /usr/include/c++/13/ostream:
 
 /usr/include/c++/13/istream:
+
+/home/roberto/Devcpp/UdacityCpp/CapstoneSnakeGame/src/config.h:
 
 /usr/include/c++/13/iostream:
 
