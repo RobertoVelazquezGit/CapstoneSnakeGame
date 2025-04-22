@@ -8,7 +8,7 @@
 #include "snake.h"
 #include "barrier.h"
 #include "snakecolor.h"
-
+#include "scorerecord.h"
 
 class Game {
  public:
@@ -34,6 +34,8 @@ class Game {
   std::uniform_int_distribution<int> random_h;
   
   SnakeColor snakecolor_;
+
+  ScoreRecord scorerecord_;
 
   int score{0};
 

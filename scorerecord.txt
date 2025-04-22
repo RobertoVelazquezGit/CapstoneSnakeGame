@@ -1,0 +1,2 @@
+highest_score 6
+latest_score 1

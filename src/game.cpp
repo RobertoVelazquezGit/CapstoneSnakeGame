@@ -8,7 +8,8 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       snake(grid_width, grid_height, linebarrier_, squarebarrier_),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)){
+      random_h(0, static_cast<int>(grid_height - 1)),
+      scorerecord_(){
   PlaceFood();
 }
 
@@ -53,6 +54,13 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
   // We may need to join the snake color thread if this is running  
   snakecolor_.joinIfRunning();
+
+  // Save latest score and highest score (if necessary) to file
+  if(score > scorerecord_.getHighestScore()){
+    scorerecord_.setHighestScore(score);
+  }
+  scorerecord_.setLatestScore(score);
+  scorerecord_.saveToFile();
 }
 
 void Game::PlaceFood() {

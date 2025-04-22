@@ -22,3 +22,4 @@ debug:
 .PHONY: clean
 clean:
 	rm -rf build
+	rm -f scorerecord.txt

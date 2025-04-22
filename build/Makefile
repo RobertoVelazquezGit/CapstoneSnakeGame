@@ -249,6 +249,30 @@ src/renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/renderer.cpp.s
 .PHONY : src/renderer.cpp.s
 
+src/scorerecord.o: src/scorerecord.cpp.o
+.PHONY : src/scorerecord.o
+
+# target to build an object file
+src/scorerecord.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/scorerecord.cpp.o
+.PHONY : src/scorerecord.cpp.o
+
+src/scorerecord.i: src/scorerecord.cpp.i
+.PHONY : src/scorerecord.i
+
+# target to preprocess a source file
+src/scorerecord.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/scorerecord.cpp.i
+.PHONY : src/scorerecord.cpp.i
+
+src/scorerecord.s: src/scorerecord.cpp.s
+.PHONY : src/scorerecord.s
+
+# target to generate assembly for a file
+src/scorerecord.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/scorerecord.cpp.s
+.PHONY : src/scorerecord.cpp.s
+
 src/snake.o: src/snake.cpp.o
 .PHONY : src/snake.o
 
@@ -321,6 +345,9 @@ help:
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"
+	@echo "... src/scorerecord.o"
+	@echo "... src/scorerecord.i"
+	@echo "... src/scorerecord.s"
 	@echo "... src/snake.o"
 	@echo "... src/snake.i"
 	@echo "... src/snake.s"

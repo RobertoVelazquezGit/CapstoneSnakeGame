@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SnakeGame.dir/src/main.cpp.o.d"
   "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o"
   "CMakeFiles/SnakeGame.dir/src/renderer.cpp.o.d"
+  "CMakeFiles/SnakeGame.dir/src/scorerecord.cpp.o"
+  "CMakeFiles/SnakeGame.dir/src/scorerecord.cpp.o.d"
   "CMakeFiles/SnakeGame.dir/src/snake.cpp.o"
   "CMakeFiles/SnakeGame.dir/src/snake.cpp.o.d"
   "CMakeFiles/SnakeGame.dir/src/snakecolor.cpp.o"
