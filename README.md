@@ -73,6 +73,7 @@ This work is licensed under a
 1.2 The project reads data from a file and process the data, or the program writes data to a file.
  `scoreRecord::ScoreRecord()` on scorerecord.cpp line 12.
 1.4 The project uses data structures and immutable variables.
+ `const std::vector<SDL_Point> &getBarrierPoints() const;` from Barrier class on barrier.h line 13. 
  `kNumberOf_points_, kPos_y_points_, kPosStart_x_points_` from Barrier class on barrier.h line 21.
 
 2. Object Oriented Programming 
@@ -85,7 +86,7 @@ This work is licensed under a
  LineBarrier derived class constructor on barrier.cpp line 26.
  SquareBarrier derived class constructor on barrier.cpp line 41.
 2.4 Overloaded functions allow the same function to operate on different parameters.
- `bool Barrier::contains(const SDL_Point &point) const` and bool Barrier::contains(int x, int y) const on barrier.cpp lines 17 and 23.
+ `bool Barrier::contains(const SDL_Point &point) const` and `bool Barrier::contains(int x, int y) const` on barrier.cpp lines 17 and 23.
 2.5 Classes follow an appropriate inheritance hierarchy with virtual and override functions.
  `virtual void addBarrierPoints() = 0` abstract method on abstract base class Barrier, barrier.h line 25.
  `void addBarrierPoints() override` on derived class LineBarrier, barrier.h line 33.
@@ -94,6 +95,7 @@ This work is licensed under a
 3. Memory Management
 3.1 The project makes use of references in function declarations.
  `renderer.Render(snake, food, linebarrier_, squarebarrier_, snakecolor_);` on game.cpp line 31. References to `linebarrier_`, `squarebarrier_` and `snakecolor_` instances composing the game instance are passed to `Renderer::Render` method.
+ `LineBarrier &linebarrier_;` and `SquareBarrier &squarebarrier_;` private members of Snake class are references, on snake.h line 42.
 3.2 The project uses destructors appropriately.
  `Renderer::~Renderer()` destructor from Renderer class, on renderer.cpp line 39.
 3.4 The project follows the Rule of 5.
