@@ -29,6 +29,10 @@ Renderer::Renderer(const std::size_t screen_width,
     return;
   }
 
+  /*
+   * When calling reset() on a std::unique_ptr, the custom deleter is preserved.
+   * Only the managed pointer is replaced; the deleter remains unchanged.
+   */
   sdl_window.reset(raw_window);
 
   // Step 3: Create renderer
@@ -43,39 +47,6 @@ Renderer::Renderer(const std::size_t screen_width,
   sdl_renderer.reset(raw_renderer);
 }
 
-/*
-Renderer::Renderer(const std::size_t screen_width,
-                   const std::size_t screen_height,
-                   const std::size_t grid_width, const std::size_t grid_height)
-    : screen_width(screen_width), screen_height(screen_height),
-      grid_width(grid_width), grid_height(grid_height),
-      sdl_window(SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
-                                  SDL_WINDOWPOS_CENTERED, screen_width,
-                                  screen_height, SDL_WINDOW_SHOWN),
-                 SDL_DestroyWindow),
-      sdl_renderer(
-          SDL_CreateRenderer(sdl_window.get(), -1, SDL_RENDERER_ACCELERATED),
-          SDL_DestroyRenderer) {
-  // Initialize SDL
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    std::cerr << "SDL could not initialize.\n";
-    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
-  }
-
-  // Check sdl_window smart pointer
-  if (nullptr == sdl_window) {
-    std::cerr << "Window could not be created.\n";
-    std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
-  }
-
-  // Check sdl_renderer smart pointer
-  if (nullptr == sdl_renderer) {
-    std::cerr << "Renderer could not be created.\n";
-    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
-  }
-}
-*/
-
 // Destructor
 Renderer::~Renderer() { SDL_Quit(); }
 
@@ -83,24 +54,33 @@ Renderer::~Renderer() { SDL_Quit(); }
 Renderer::Renderer(const Renderer &source)
     : screen_width(source.screen_width), screen_height(source.screen_height),
       grid_width(source.grid_width), grid_height(source.grid_height),
-      sdl_window(SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
-                                  SDL_WINDOWPOS_CENTERED, screen_width,
-                                  screen_height, SDL_WINDOW_SHOWN),
-                 SDL_DestroyWindow),
-      sdl_renderer(
-          SDL_CreateRenderer(sdl_window.get(), -1, SDL_RENDERER_ACCELERATED),
-          SDL_DestroyRenderer) {
-  // Check sdl_window smart pointer
-  if (nullptr == sdl_window) {
+      sdl_window(nullptr, SDL_DestroyWindow),
+      sdl_renderer(nullptr, SDL_DestroyRenderer) {
+
+  // Do the same as in constructor with parameters but do not call SDL_Init()
+
+  // Create window
+  SDL_Window *raw_window = SDL_CreateWindow(
+      "Snake Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+      screen_width, screen_height, SDL_WINDOW_SHOWN);
+  if (!raw_window) {
     std::cerr << "Window could not be created.\n";
-    std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+    return;
   }
 
-  // Check sdl_renderer smart pointer
-  if (nullptr == sdl_renderer) {
+  sdl_window.reset(raw_window);
+
+  // Create renderer
+  SDL_Renderer *raw_renderer =
+      SDL_CreateRenderer(raw_window, -1, SDL_RENDERER_ACCELERATED);
+  if (!raw_renderer) {
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+    return;
   }
+
+  sdl_renderer.reset(raw_renderer);
 }
 
 // Copy assignment operator

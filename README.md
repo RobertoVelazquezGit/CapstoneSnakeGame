@@ -97,13 +97,14 @@ This work is licensed under a
  `renderer.Render(snake, food, linebarrier_, squarebarrier_, snakecolor_);` on game.cpp line 31. References to `linebarrier_`, `squarebarrier_` and `snakecolor_` instances composing the game instance are passed to `Renderer::Render` method.
  `LineBarrier &linebarrier_;` and `SquareBarrier &squarebarrier_;` private members of Snake class are references, on snake.h line 42.
 3.2 The project uses destructors appropriately.
- `Renderer::~Renderer()` destructor from Renderer class, on renderer.cpp line 39.
+ `Renderer::~Renderer()` destructor from Renderer class, on renderer.cpp line 51.
 3.4 The project follows the Rule of 5.
  Render (renderer.h and cpp) class follows rule of five. Renderer.h line 13.
  Destructor calls automatically the SDL2 custom deleters `SDL_DestroyWindow` and `SDL_DestroyRenderer`. The custom deleters are associated to the unique pointers when these are initialized in the constructor. Example `sdl_window(SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screen_width, screen_height, SDL_WINDOW_SHOWN),     SDL_DestroyWindow)` on renderer.cpp `Renderer::Renderer(const std::size_t screen_width` parametrized constructor.
 3.5 The project uses move semantics to move data instead of copying it, where possible.
  In in void LineBarrier::addBarrierPoints() method `points_.emplace_back(std::move(point));` on barrier.cpp line 36.
- In movement constructor of Renderer class, on `sdl_window(std::move(other.sdl_window))` renderer.cpp line 112.
+ In movement constructor of Renderer class, on `sdl_window(std::move(other.sdl_window))` renderer.cpp line 131.
+ `This->sdl_window = std::move(temp_window);` moving a temporal unique_ptr, assignment operator Renderer class, renderer.cpp line 104.
 3.6 The project uses smart pointers instead of raw pointers.
  `sdl_window` unique_ptr, renderer.h line 49.
  `sdl_renderer` unique_ptr, renderer.h line 53.
