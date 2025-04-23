@@ -22,7 +22,7 @@ protected:
   const int kPos_y_points_;
   const int kPosStart_x_points_;
 
-  virtual void addBarrierPoints() = 0; // abstract method
+  virtual void addBarrierPoints() = 0; // abstract method or pure virtual
 };
 
 class LineBarrier : public Barrier {

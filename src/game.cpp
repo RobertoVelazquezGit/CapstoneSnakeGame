@@ -52,7 +52,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     }
   }
 
-  // We may need to join the snake color thread if this is running  
+  // Join the snake color thread
   snakecolor_.joinIfRunning();
 
   // Save latest score and highest score (if necessary) to file
