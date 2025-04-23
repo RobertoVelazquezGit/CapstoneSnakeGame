@@ -14,7 +14,13 @@ void SnakeColor::startTask() {
     if (workerThread_.joinable()) {
       workerThread_.join(); // Join the previous thread if it was still active
     }
-    stopRequested_.store(false); // Reset cancel flag when starting new trhead
+
+    // Reset stopRequested_ under lock
+    {
+      std::lock_guard<std::mutex> lock(stopMutex_);
+      stopRequested_ = false;
+    }
+
     workerThread_ = std::thread(&SnakeColor::task, this);
   } else {
     if constexpr (Config::ENABLE_SNAKECOLOR_DEBUG_MESSAGES) {
@@ -29,8 +35,13 @@ void SnakeColor::task() {
     std::cout << "Task started: flagColor_ = true\n";
   }
 
-  // Simulated work of 3 seconds
-  for (int i = 0; i < 30 && !stopRequested_.load(); ++i) {
+  // Simulated work (n seconds) loop with cancellation check
+  for (int i = 0; i < 30; ++i) {
+    {
+      std::lock_guard<std::mutex> lock(stopMutex_);
+      if (stopRequested_)
+        break;
+    }
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 
@@ -43,9 +54,12 @@ void SnakeColor::task() {
 }
 
 void SnakeColor::joinIfRunning() {
-  if (taskRunning_.load()) {
-    stopRequested_.store(true); // Signal to stop the thread
+  // Request the task to stop under lock
+  {
+    std::lock_guard<std::mutex> lock(stopMutex_);
+    stopRequested_ = true;
   }
+
   if (workerThread_.joinable()) {
     workerThread_.join();
   }

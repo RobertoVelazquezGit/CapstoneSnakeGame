@@ -60,7 +60,7 @@ This work is licensed under a
 
 1. Barrier abstract base class (barrier.cpp, barrier.h). A LineBarrier and a SquareBarrier classes are derived from Barrier and rendered, having a linear barrier and a square barrier. If the snake hits any of the two barriers, the game ends.
 2. Rule of Five on Renderer class (renderer.cpp, renderer.h). Use of unique pointers with SDL2 custom deleters, wich are automatically called when the instance of Renderer goes out of scope.
-3. SnakeColor class to change the snake's color when eats food. This is accomplished launching a std::thread worker thread and taking care of properly joining it. While the worker thread is running, the snake is rendered in a different color. Atomic boolean flags are used to keep status of the worker thread and to signal the worker thread to finish.
+3. SnakeColor class to change the snake's color when eats food. This is accomplished launching a std::thread worker thread and taking care of properly joining it. While the worker thread is running, the snake is rendered in a different color. Atomic boolean flags are used to keep status of the worker thread. A mutex is used to signal the worker thread to finish when the game is over.
 4. ScoreRecord class saves and recovers from a scorerecord.txt file the highest record and the latest record. If the file does not exists it is created on ${CMAKE_SOURCE_DIR} folder.
 5. config.h file contains the Config namespace. Config::ENABLE_SNAKECOLOR_DEBUG_MESSAGES member enbales/disables code to print out debug messages of SnakeColor class making use of constexpr.
 
@@ -110,7 +110,7 @@ This work is licensed under a
 4.1 The project uses multithreading.
  `std::thread workerThread_`in snakecolor.h line 23, launched from `void SnakeColor::startTask()` with the funcion `void SnakeColor::task()`. the std::thread is launched when the snake eats food `snakecolor_.startTask();` in `void Game::Update()` on game.cpp line 99.
 4.3 A mutex or lock is used in the project.
- ToDo
+ `std::mutex stopMutex_` protecting `bool stopRequested_ = false;` in snakecolor.h line 25. When game is over, `from snakecolor_.joinIfRunning();` Game::Run game.cpp file line 56, a signal using a boolean protected by the mutex and sent to the `SnakeColor::task()` so this worker thread finish in a sampling of 100 msec. Afterwards, the join of `std::thread workerThread_` is awaited in `SnakeColor::joinIfRunning`.
 
  
  
