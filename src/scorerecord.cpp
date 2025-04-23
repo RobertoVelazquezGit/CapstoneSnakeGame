@@ -73,13 +73,20 @@ void ScoreRecord::setLatestScore(int score) {
 
 // Saves the scores to the file (overwrites previous content)
 void ScoreRecord::saveToFile() const {
+    std::ostringstream line1;
+    std::ostringstream line2;
+
+    line1 << "highest_score " << highest_score;
+    line2 << "latest_score " << latest_score;
+
     std::ofstream outfile(FILENAME, std::ios::trunc);
     if (outfile.is_open()) {
-        outfile << "highest_score " << highest_score << "\n";
-        outfile << "latest_score " << latest_score << "\n";
+        outfile << line1.str() << "\n";
+        outfile << line2.str() << "\n";
         outfile.close();
     } else {
         std::cerr << "Error: could not open file for writing.\n";
     }
 }
+
 

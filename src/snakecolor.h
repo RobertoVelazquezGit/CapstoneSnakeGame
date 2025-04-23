@@ -17,8 +17,9 @@ public:
 private:
     void task();                  // Background task logic
 
-    std::atomic<bool> flagColor{false};
-    std::atomic<bool> taskRunning{false};
+    std::atomic<bool> flagColor_{false};
+    std::atomic<bool> taskRunning_{false};
+    std::atomic<bool> stopRequested_{false};
     std::thread workerThread_;
 };
 
